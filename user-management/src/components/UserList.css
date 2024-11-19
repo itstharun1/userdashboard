@@ -1,0 +1,72 @@
+.user-card{
+    background-color: rgb(167, 32, 245);
+    border-radius: 10px;
+    padding: 25px;
+    margin: 10px;
+    width: 30vw;
+    font-style: italic;
+    font-weight: bold;
+    height: 60vh;
+}
+.main-card{
+    overflow: hidden;
+    padding: 20px;
+}
+.logo{
+    height: 10vh;
+}
+.logo-css{
+    text-align: center;
+}
+
+@media only screen and (max-width: 600px) {
+    .user-card{
+        width: 90vw;
+    }
+
+    .user-add-card{
+        display: none;
+    }
+    .user-main-card{
+        display: flex;
+        flex-direction: column;
+    }
+}
+.buttons-card{
+    display: flex;
+    justify-content: space-around;
+    align-items: end;
+}
+.btn{
+    background-color: rgb(32, 167, 245);
+    padding: 7px;
+    border-radius: 5px;
+    border-width: 0px;
+    margin: 10px;
+    font-weight: bold;
+}
+.user-main-card{
+    display: flex;
+    justify-content: space-between;
+}
+
+
+@media only screen and (min-width: 601px) {
+    .user-add-card{
+        position: fixed; 
+        top: 80px;
+        right: 20px;
+        width: 40vw;
+        margin: 30px;
+        height: 50vh;
+        border-radius: 8px;
+    }
+    .user-add-card2{
+        display: none;
+    }
+
+}
+
+.updateusercard{
+    display: none;
+}
