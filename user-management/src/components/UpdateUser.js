@@ -2,7 +2,7 @@
 import React, { useState,useEffect} from 'react';
 import './userform.css'
 
-const UpdateUser = ({newData}) => {
+const UpdateUser = ({updateoldUser}) => {
 
 
  
@@ -14,14 +14,7 @@ const UpdateUser = ({newData}) => {
     phone: '',
   });
 
-// take that newData and update in formData
-useEffect(() => {
-  setFormData(newData);
-  }, [newData]);
-console.log(formData);
-
-
-
+  
   
 
     const handleChange = (e) => {
@@ -35,6 +28,7 @@ console.log(formData);
 
 const handleSubmit = (e) => {
   e.preventDefault();
+  updateoldUser(formData);
   
     };
 
@@ -49,7 +43,7 @@ const handleSubmit = (e) => {
         type="text"
         id="name"
         name="name"
-        value={formData.name}
+       
         onChange={handleChange}
         required
       />
@@ -60,7 +54,7 @@ const handleSubmit = (e) => {
         type="email"
         id="email"
         name="email"
-        value={formData.email}
+     
         onChange={handleChange}
         required
       />
@@ -71,7 +65,7 @@ const handleSubmit = (e) => {
         type="text"
         id="website"
         name="website"
-        value={formData.website}
+       
         onChange={handleChange}
         required
       />
@@ -82,7 +76,7 @@ const handleSubmit = (e) => {
         type="tel"
         id="phone"
         name="phone"
-        value={formData.phone}
+      
         onChange={handleChange}
         required
       />

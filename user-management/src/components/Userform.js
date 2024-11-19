@@ -1,11 +1,14 @@
 // src/components/UserForm.js
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 
 import './userform.css'
 
-const UserForm = ({addUser,l,changeAddbtn}) => {
+const UserForm = ({addUser,l,changeAddbtn,data}) => {
 
   var t=l+1;
+ if(data){
+  t=data.id
+ }
   
 
 
@@ -17,6 +20,14 @@ const UserForm = ({addUser,l,changeAddbtn}) => {
     website: '',
     phone: '',
   });
+
+//set data in formData useing useeffect
+useEffect(() => {
+  if (data) {
+    setFormData(data);
+    }
+    }, [data]);
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -39,6 +50,7 @@ const handleSubmit = (e) => {
     phone: '',
     });
     changeAddbtn();
+  
     };
 
 

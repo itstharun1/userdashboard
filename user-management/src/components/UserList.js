@@ -1,19 +1,55 @@
 import React from 'react'
-import UpdateUser from './UpdateUser';
+
 import './UserList.css'
 import UserForm from './Userform';
-import { useState} from 'react';
+import { useState,useEffect} from 'react';
 import UserAddbtn from './UserAddbtn';
 import logo from '../images/logo.png'
 import { Link } from 'react-router-dom';
+import axios from 'axios'
 
 
-
-function UserList({users,addUser,deleteUser,dataUpdate}) {
+function UserList() {
 
   const [displayAdd,setDisplayAdd]=useState(false)
-  
-  
+  const [users, setUsers] = useState([])
+  const [newData,setNewData]=useState()
+
+
+  const getData = ()=>{
+    axios.get('https://jsonplaceholder.typicode.com/users')
+    .then(response => {
+      setUsers(response.data)
+      })
+      .catch(error => {
+        console.error(error);
+        });
+  }
+  useEffect(() => { 
+    getData()
+   }, [])
+
+
+   const addUser=(val)=>{
+    const userExist=users.find(user=>user.id===val.id)
+    if(userExist){
+      setUsers(users.map(user=>user.id===val.id?val:user))
+      }
+      else{
+        setUsers([...users,val])
+        }
+      setNewData(null)
+
+    
+   }
+
+   const deleteUser=(id)=>{
+    setUsers(users.filter(user=>user.id!==id))
+    }
+
+
+    
+
 
 
 
@@ -29,7 +65,12 @@ function UserList({users,addUser,deleteUser,dataUpdate}) {
   const changeAddbtn=(val)=>{
     setDisplayAdd(!displayAdd)
     const user =  users.find((user) => user.id === val);
-    dataUpdate(user)
+    if(user){
+      setNewData(user)
+    }
+    
+
+
    } 
 
 
@@ -70,9 +111,9 @@ function UserList({users,addUser,deleteUser,dataUpdate}) {
               <h3>Website : {user.website}</h3>
               <h3>Phone : {user.phone}</h3>
               <div className='buttons-card'>
-                <Link to='/userupdate' >
+             
                 <button onClick={() => changeAddbtn(user.id)} className='btn'>Edit</button>
-                </Link>
+       
                 <button onClick={()=>(deleteUser(user.id))} className='btn'>Delete</button>
               </div>
             </div>
@@ -88,7 +129,7 @@ function UserList({users,addUser,deleteUser,dataUpdate}) {
           </div>
         ):(
           <div>
-            <UserForm  changeAddbtn={changeAddbtn}  l={l} addUser={addUser} />
+            <UserForm data={newData} changeAddbtn={changeAddbtn}  l={l} addUser={addUser} />
           </div>          
         )
       }
@@ -96,9 +137,7 @@ function UserList({users,addUser,deleteUser,dataUpdate}) {
 
             
     </div>
-    <div className='updateusercard'>
-    <UpdateUser />
-    </div>
+
     
     </div>
   )
