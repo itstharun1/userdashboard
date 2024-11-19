@@ -1,11 +1,11 @@
 // src/components/UserForm.js
-import React, { useState} from 'react';
+import React, { useState,useEffect} from 'react';
 import './userform.css'
 
-const UpdateUser = ({user}) => {
+const UpdateUser = ({newData}) => {
 
 
-
+ 
   const [formData, setFormData] = useState({
     id:'',
     name: '',
@@ -13,6 +13,14 @@ const UpdateUser = ({user}) => {
     website: '',
     phone: '',
   });
+
+// take that newData and update in formData
+useEffect(() => {
+  setFormData(newData);
+  }, [newData]);
+console.log(formData);
+
+
 
   
 
@@ -27,7 +35,7 @@ const UpdateUser = ({user}) => {
 
 const handleSubmit = (e) => {
   e.preventDefault();
-console.log(user)
+  
     };
 
 

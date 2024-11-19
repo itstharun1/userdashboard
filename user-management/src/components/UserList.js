@@ -2,17 +2,17 @@ import React from 'react'
 import UpdateUser from './UpdateUser';
 import './UserList.css'
 import UserForm from './Userform';
-import { useState ,useEffect} from 'react';
-import axios from 'axios';
+import { useState} from 'react';
 import UserAddbtn from './UserAddbtn';
 import logo from '../images/logo.png'
 import { Link } from 'react-router-dom';
 
 
 
-function UserList() {
-  const [users, setUsers] = useState([])
+function UserList({users,addUser,deleteUser,dataUpdate}) {
+
   const [displayAdd,setDisplayAdd]=useState(false)
+  
   
 
 
@@ -20,48 +20,22 @@ function UserList() {
   let l=users.length;
 
 
-  const getData = ()=>{
-    axios.get('https://jsonplaceholder.typicode.com/users')
-    .then(response => {
-      setUsers(response.data)
-      })
-      .catch(error => {
-        console.error(error);
-        });
-  }
-  useEffect(() => { 
-    getData()
-   }, [])
+
 
 
 
     
    
-   const changeAddbtn=(val)=>{
+  const changeAddbtn=(val)=>{
     setDisplayAdd(!displayAdd)
     const user =  users.find((user) => user.id === val);
-    
-
+    dataUpdate(user)
    } 
 
 
-   const addUser=(val)=>{
-    // add user to api
-    const response=axios.post('https://jsonplaceholder.typicode.com/users', {val})
-    .then(response => {
-      console.log(response.data)
-      setUsers([...users,response.data.val])
-      })
-      .catch(error => {
-        console.error(error);
-        });
-    
  
-   }
 
-   const deleteUser=(id)=>{
-    setUsers(users.filter(user=>user.id!==id))
-    }
+   
 
 
 
